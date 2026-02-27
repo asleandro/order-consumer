@@ -1,9 +1,12 @@
 package com.leandro.order_consumer.service;
 
+import com.leandro.order_consumer.controller.OrderResponse;
 import com.leandro.order_consumer.dto.OrderCreatedEvent;
 import com.leandro.order_consumer.entity.OrderEntity;
 import com.leandro.order_consumer.entity.OrderItem;
 import com.leandro.order_consumer.repository.OrderRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -26,6 +29,11 @@ public class OrderService {
         entity.setItens(getOrderItens(event));
 
         orderRepository.save(entity);
+    }
+
+    public Page<OrderResponse> findAllByCustomerId(Long customerId, PageRequest pageRequest){
+        var orders = orderRepository.findAllByCustomerId(customerId, pageRequest);
+        return orders.map(OrderResponse::fromEntity);
     }
 
     private BigDecimal getTotal(OrderCreatedEvent event) {
