@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: order-consumer
+
+  mongodb:
+    uri: mongodb://admin:123@localhost:27017/orderconsumerdb?authSource=admin
+    #port: 27017
+    #database: orderconsumerdb
+    #username: admin
+    #password: 123
+    #authentication-database: admin
+    #connection-pool:
+     # max-size: 10
+     # min-size: 2
+     # max-idle-time: 6000000
+     # max-life-time: 18000000
+     # max-wait-time: 5000
+     # maintenance-frequency: 5000
+
+  data:
+    auto-index-creation: true
+
+  logging:
+    level:
+      org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+      org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
+      com.mongodb.internal.connection: TRACE
+      org.springframework.amqp.rabbit.listener: DEBUG
+      com.mongodb.connection: DEBUG
+      com.mongodb.client: DEBUG
